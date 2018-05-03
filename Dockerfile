@@ -1,4 +1,4 @@
-FROM deepcognition/deep-learning-studio:latest
+FROM deepcognitionlabs/deep-learning-studio:latest
 
 # Copy repo into ${HOME}, make user own $HOME
 USER root
