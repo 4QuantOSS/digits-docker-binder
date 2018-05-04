@@ -1,4 +1,4 @@
-FROM deepcognitionlabs/deep-learning-studio:2.0.0
+FROM nvidia/digits:6.0
 
 ENV NB_USER jovyan
 ENV NB_UID 1000
@@ -9,28 +9,23 @@ RUN adduser --disabled-password \
     --uid ${NB_UID} \
     ${NB_USER}
 
-# setup paths
-RUN mkdir /home/app/database
-RUN chown -R ${NB_USER} /home/app/database
-RUN mkdir /root/.keras
-RUN chown -R ${NB_USER} /root/.keras
-RUN mkdir /data
-RUN chown -R ${NB_USER} /data
-
-# allow jovyan to change RUN
-RUN chown -R ${NB_USER} /run
-RUN chown -R ${NB_USER} /var
-
 # Copy repo into ${HOME}, make user own $HOME
 USER root
+# install python3 and jupyter
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3-dev \
+        python3-pip \
+        python3-jupyter && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY . ${HOME}
 RUN chown -R ${NB_USER} ${HOME}
 
 USER ${NB_USER}
 WORKDIR ${HOME}
-RUN pip install https://github.com/betatim/nbserverproxy/archive/master.zip
+RUN pip3 install https://github.com/betatim/nbserverproxy/archive/master.zip
 RUN jupyter serverextension enable --py nbserverproxy
-RUN pip install -e.
+RUN pip3 install -e.
 RUN jupyter serverextension enable  --user --py nbdlstudioproxy
 RUN jupyter nbextension     install --user --py nbdlstudioproxy
 RUN jupyter nbextension     enable  --user --py nbdlstudioproxy
