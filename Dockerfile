@@ -11,8 +11,8 @@ RUN adduser --disabled-password \
 
 USER root
 # install python3 and jupyter
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN add-apt-repository ppa:deadsnakes/ppa && \
+    apt-get update && apt-get install -y --no-install-recommends \
         python3.6 && \
     rm -rf /var/lib/apt/lists/*
 RUN curl https://bootstrap.pypa.io/get-pip.py | python3.6
