@@ -23,4 +23,10 @@ COPY . ${HOME}
 RUN chown -R ${NB_USER} ${HOME}
 
 USER ${NB_USER}
-CMD ["jupyter", "notebook", "--ip", "0.0.0.0"
+RUN pip install https://github.com/betatim/nbserverproxy/archive/master.zip
+RUN jupyter serverextension enable --py nbserverproxy
+RUN pip install -e.
+RUN jupyter serverextension enable  --user --py nbdlstudioproxy
+RUN jupyter nbextension     install --user --py nbdlstudioproxy
+RUN jupyter nbextension     enable  --user --py nbdlstudioproxy
+CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
