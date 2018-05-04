@@ -32,4 +32,6 @@ RUN jupyter nbextension     install --user --py nbdlstudioproxy
 RUN jupyter nbextension     enable  --user --py nbdlstudioproxy
 
 USER ${NB_USER}
+
+ENTRYPOINT [""]
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
