@@ -17,6 +17,10 @@ RUN chown -R ${NB_USER} /root/.keras
 RUN mkdir /data
 RUN chown -R ${NB_USER} /data
 
+# allow jovyan to change RUN
+RUN chown -R ${NB_USER} /run
+RUN chown -R ${NB_USER} /var
+
 # Copy repo into ${HOME}, make user own $HOME
 USER root
 COPY . ${HOME}
@@ -30,5 +34,5 @@ RUN pip install -e.
 RUN jupyter serverextension enable  --user --py nbdlstudioproxy
 RUN jupyter nbextension     install --user --py nbdlstudioproxy
 RUN jupyter nbextension     enable  --user --py nbdlstudioproxy
-USER root
+
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]

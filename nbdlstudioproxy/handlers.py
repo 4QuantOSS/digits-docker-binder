@@ -33,6 +33,6 @@ class AddSlashHandler(IPythonHandler):
 def setup_handlers(web_app):
     web_app.add_handlers('.*', [
         (ujoin(web_app.settings['base_url'], 'dlstudio/(.*)'),
-         OpenRefineProxyHandler, dict(state={})),
+         DLStudioProxyHandler, dict(state={})),
         (ujoin(web_app.settings['base_url'], 'dlstudio'), AddSlashHandler)
         ])
