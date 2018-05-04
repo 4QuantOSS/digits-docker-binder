@@ -11,11 +11,11 @@ RUN adduser --disabled-password \
 
 USER root
 # install python3 and jupyter
+RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        python3-dev \
-        python3-pip && \
+        python3.6 && \
     rm -rf /var/lib/apt/lists/*
-
+RUN curl https://bootstrap.pypa.io/get-pip.py | python3.6
 RUN pip3 install --upgrade setuptools pip
 RUN pip3 install jupyter notebook
 RUN pip3 install https://github.com/betatim/nbserverproxy/archive/master.zip
