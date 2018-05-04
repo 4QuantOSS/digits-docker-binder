@@ -22,15 +22,15 @@ RUN pip3 install https://github.com/betatim/nbserverproxy/archive/master.zip
 
 # Copy repo into ${HOME}, make user own $HOME
 COPY . ${HOME}
-RUN chown -R ${NB_USER} ${HOME}
 
 WORKDIR ${HOME}
 RUN jupyter serverextension enable --py nbserverproxy
 RUN pip3 install -e.
-RUN jupyter serverextension enable  --user --py nbdlstudioproxy
-RUN jupyter nbextension     install --user --py nbdlstudioproxy
-RUN jupyter nbextension     enable  --user --py nbdlstudioproxy
+RUN jupyter serverextension enable --py nbdlstudioproxy
+RUN jupyter nbextension     install --py nbdlstudioproxy
+RUN jupyter nbextension     enable --py nbdlstudioproxy
 
+RUN chown -R ${NB_USER} ${HOME}
 USER ${NB_USER}
 
 ENTRYPOINT [""]
