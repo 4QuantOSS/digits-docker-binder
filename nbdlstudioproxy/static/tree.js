@@ -29,9 +29,9 @@ define(function(require) {
         var orsession_link = $('<a>')
             .attr('role', 'menuitem')
             .attr('tabindex', '-1')
-            .attr('href', base_url + 'openrefine/')
+            .attr('href', base_url + 'dlstudio/')
             .attr('target', '_blank')
-            .text('OpenRefine Session');
+            .text('Launch DeepLearningStudio');
 
         /* add the link to the item and
          * the item to the menu */

@@ -7,7 +7,6 @@ def _jupyter_server_extension_paths():
         'module': 'nbdlstudioproxy',
     }]
 
-
 def _jupyter_nbextension_paths():
     return [{
         "section": "tree",

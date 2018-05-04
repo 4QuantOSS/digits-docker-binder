@@ -30,4 +30,5 @@ RUN pip install -e.
 RUN jupyter serverextension enable  --user --py nbdlstudioproxy
 RUN jupyter nbextension     install --user --py nbdlstudioproxy
 RUN jupyter nbextension     enable  --user --py nbdlstudioproxy
+USER root
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
