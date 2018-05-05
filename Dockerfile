@@ -41,6 +41,9 @@ ENV HOME /root
 # Copy repo into ${HOME}, make user own $HOME
 COPY . ${HOME}
 RUN chown -R ${NB_USER} /root
+
+WORKDIR ${HOME}/digits
+RUN python setup.py install
 WORKDIR ${HOME}
 
 USER ${NB_USER}
