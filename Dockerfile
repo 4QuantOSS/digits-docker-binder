@@ -37,6 +37,12 @@ RUN jupyter nbextension     install --py nbdlstudioproxy
 RUN jupyter nbextension     enable --py nbdlstudioproxy
 
 RUN chown -R ${NB_USER} ${HOME}
+ENV HOME /root
+# Copy repo into ${HOME}, make user own $HOME
+COPY . ${HOME}
+RUN chown -R ${NB_USER} /root
+WORKDIR ${HOME}
+
 USER ${NB_USER}
 
 ENV DIGITS_JOBS_DIR=${HOME}/jobs
