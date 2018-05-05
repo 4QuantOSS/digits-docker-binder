@@ -12,7 +12,7 @@ class DLStudioProxyHandler(SuperviseAndProxyHandler):
     name = 'DLStudio'
 
     def get_cmd(self):
-        cmd = ['/home/app/start.sh',
+        cmd = ['python -m digits',
                '-p', str(self.port)
                ]
         return cmd
@@ -32,7 +32,7 @@ class AddSlashHandler(IPythonHandler):
 
 def setup_handlers(web_app):
     web_app.add_handlers('.*', [
-        (ujoin(web_app.settings['base_url'], 'dlstudio/(.*)'),
+        (ujoin(web_app.settings['base_url'], 'digits/(.*)'),
          DLStudioProxyHandler, dict(state={})),
-        (ujoin(web_app.settings['base_url'], 'dlstudio'), AddSlashHandler)
+        (ujoin(web_app.settings['base_url'], 'digits'), AddSlashHandler)
         ])
