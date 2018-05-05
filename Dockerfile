@@ -33,5 +33,8 @@ RUN jupyter nbextension     enable --py nbdlstudioproxy
 RUN chown -R ${NB_USER} ${HOME}
 USER ${NB_USER}
 
+ENV DIGITS_JOBS_DIR=${HOME}/jobs
+ENV DIGITS_LOGFILE_FILENAME=${HOME}/digits.log
+
 ENTRYPOINT [""]
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
