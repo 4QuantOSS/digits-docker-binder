@@ -26,6 +26,7 @@ RUN pip3 install --upgrade setuptools pip
 RUN pip3 install jupyter notebook
 RUN pip3 install https://github.com/betatim/nbserverproxy/archive/master.zip
 
+ENV HOME /root
 # Copy repo into ${HOME}, make user own $HOME
 COPY . ${HOME}
 
@@ -37,10 +38,6 @@ RUN jupyter nbextension     install --py nbdlstudioproxy
 RUN jupyter nbextension     enable --py nbdlstudioproxy
 
 RUN chown -R ${NB_USER} ${HOME}
-ENV HOME /root
-# Copy repo into ${HOME}, make user own $HOME
-COPY . ${HOME}
-RUN chown -R ${NB_USER} /root
 
 WORKDIR ${HOME}/digits
 RUN python setup.py install
