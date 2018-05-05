@@ -21,7 +21,7 @@ RUN git clone -b '3.2.x' https://github.com/google/protobuf.git . && \
     make "-j$(nproc)" install
 
 
-FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu14.04 as caffe
+FROM ubuntu:14.04 as caffe
 
 COPY --from=protobuf /usr/local/protobuf /usr/local
 
@@ -73,7 +73,7 @@ RUN git clone https://github.com/nvidia/caffe.git /caffe -b 'caffe-0.15' && \
     rm -rf /caffe
 
 
-FROM nvidia/cuda:8.0-cudnn5-runtime-ubuntu14.04
+FROM ubuntu:14.04
 
 LABEL maintainer "NVIDIA CORPORATION <cudatools@nvidia.com>"
 
