@@ -29,9 +29,9 @@ define(function(require) {
         var orsession_link = $('<a>')
             .attr('role', 'menuitem')
             .attr('tabindex', '-1')
-            .attr('href', base_url + 'dlstudio/')
+            .attr('href', base_url + 'digits/')
             .attr('target', '_blank')
-            .text('Launch DeepLearningStudio');
+            .text('Launch DIGITS');
 
         /* add the link to the item and
          * the item to the menu */
