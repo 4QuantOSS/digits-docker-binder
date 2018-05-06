@@ -12,8 +12,11 @@ class DLStudioProxyHandler(SuperviseAndProxyHandler):
     name = 'DLStudio'
 
     def get_cmd(self):
-        cmd = ['python -m digits',
-               '-p', str(self.port)
+        cmd = ['python',
+               '-m',
+               'digits',
+               '-p', 
+               str(self.port)
                ]
         return cmd
 
