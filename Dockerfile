@@ -1,13 +1,16 @@
 # Start with Ubuntu base image
 FROM ubuntu:14.04
 MAINTAINER Kai Arulkumaran <design@kaixhin.com>
-
+# install python3 and jupyter
+RUN apt-get update && apt-get install -y --no-install-recommends software-properties-common curl
+RUN add-apt-repository -y ppa:george-edison55/cmake-3.x &&\ 
+  apt-get update && \
+  apt-get install -y cmake
 # Install git, wget, bc, cmake and dependencies
 RUN apt-get update && apt-get install -y \
   git \
   wget \
   bc \
-  cmake \
   graphviz \
   libgflags-dev \
   libgoogle-glog-dev \
@@ -74,8 +77,6 @@ RUN adduser --disabled-password \
     ${NB_USER}
 
 USER root
-# install python3 and jupyter
-RUN apt-get update && apt-get install -y --no-install-recommends software-properties-common curl
 
 RUN add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && apt-get install -y --no-install-recommends \
