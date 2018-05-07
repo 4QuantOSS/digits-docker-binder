@@ -19,8 +19,7 @@ import flask
 def new_url_for(*args, **kwargs):
     return '{}{}'.format(base_prefix[:-1], old_url_for(*args, **kwargs))
 flask.url_for = new_url_for 
-digits.webapp.app.config["APPLICATION_ROOT"] = base_prefix
-digits.webapp.app.wsgi_app = ReverseProxied(digits.webapp.app.wsgi_app)
+
 print('Launching Server', digits.webapp.app.config)
 digits.webapp.socketio.run(digits.webapp.app, '0.0.0.0', args['port'])
 #digits.webapp.app.run(debug=False, # needs to be false in Jupyter
