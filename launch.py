@@ -19,10 +19,9 @@ class FixScriptName(object):
         self.app = app
         self.prefix = prefix
     def __call__(self, environ, start_response):
-        SCRIPT_NAME = base_prefix
-        environ['SCRIPT_NAME'] = SCRIPT_NAME
+        environ['SCRIPT_NAME'] = self.prefix
         return self.app(environ, start_response)
-app2 = FixScriptName(app)
+app2 = FixScriptName(digits.webapp.app, base_prefix)
 print('Launching Server', digits.webapp.app.config)
 from werkzeug.serving import run_simple
 run_simple('0.0.0.0', args['port'], app2, use_reloader=False)
