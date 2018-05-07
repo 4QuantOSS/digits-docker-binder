@@ -13,15 +13,16 @@ parser.add_argument(
 args = vars(parser.parse_args())
 base_prefix = '{}proxy/{}/'.format(os.environ['JUPYTERHUB_SERVICE_PREFIX'], args['port'])
 digits.webapp.app.debug = False
-# monkey patch url_for
-from flask import url_for as old_url_for
-import flask
-def new_url_for(*args, **kwargs):
-    return '{}{}'.format(base_prefix[:-1], old_url_for(*args, **kwargs))
-flask.url_for = new_url_for 
-
+# binder specific code to make url_for work correctly
+class FixScriptName(object):
+    def __init__(self, app, prefix):
+        self.app = app
+        self.prefix = prefix
+    def __call__(self, environ, start_response):
+        SCRIPT_NAME = base_prefix
+        environ['SCRIPT_NAME'] = SCRIPT_NAME
+        return self.app(environ, start_response)
+app2 = FixScriptName(app)
 print('Launching Server', digits.webapp.app.config)
-digits.webapp.socketio.run(digits.webapp.app, '0.0.0.0', args['port'])
-#digits.webapp.app.run(debug=False, # needs to be false in Jupyter
-#                          host = '0.0.0.0',
-#                          port=args['port'])
+from werkzeug.serving import run_simple
+run_simple('0.0.0.0', args['port'], app2, use_reloader=False)
