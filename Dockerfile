@@ -1,6 +1,6 @@
 # Start with Ubuntu base image
-FROM ubuntu:14.04
-MAINTAINER Kai Arulkumaran <design@kaixhin.com>
+FROM ubuntu:16.04
+MAINTAINER Kevin Mader <k@4quant.com>
 # install python3 and jupyter
 RUN apt-get update && apt-get install -y --no-install-recommends software-properties-common curl
 RUN add-apt-repository -y ppa:george-edison55/cmake-3.x &&\ 
