@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
   wget \
   bc \
   cmake \
+  graphviz \
   libgflags-dev \
   libgoogle-glog-dev \
   libopencv-dev \
